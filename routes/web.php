@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Creación de la ruta encargada de mostrar todos los post
+Route::get('/', 'PageController@posts');
+// Creación de la ruta para visualizar un post en especifico
+Route::get('blog/{post}', 'PageController@post')->name('post');
 
 Auth::routes();
 

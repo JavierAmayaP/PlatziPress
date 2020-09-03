@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use Cviebrock\EloquentSluggable\Sluggable;
 
 use Illuminate\Database\Eloquent\Model;
@@ -22,5 +23,12 @@ class Post extends Model
                 'onUpdate' => 'true'
             ]
         ];
+    }
+
+    // Estableciendo relación uno a muchos inversa de posts a usuario.
+    // La palabra usuario se pone en singular debido a la dirección de la relación.
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
