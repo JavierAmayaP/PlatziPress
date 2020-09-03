@@ -24,6 +24,7 @@
             </div>
             <br>
             @endforeach
+            {{ $posts->links() }}
         </div>
     </div>
 </div>
