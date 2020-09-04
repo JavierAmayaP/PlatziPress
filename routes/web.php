@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 // Creación de la ruta encargada de mostrar todos los post
 Route::get('/', 'PageController@posts');
 // Creación de la ruta para visualizar un post en especifico
-Route::get('blog/{post}', 'PageController@post')->name('post');
+Route::get('blog/{post:slug}', 'PageController@post')->name('post');
 
 /* 
     1.se utiliza \ en la ruta debido a que no estamos accediendo 
