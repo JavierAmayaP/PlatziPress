@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -67,14 +68,14 @@ class PostController extends Controller
 
          */
 
-        if($request->file('file')){
+        if ($request->file('file')) {
             /*
              Enviamos la imagen al servidor con el método store
              store() -> Store the uploaded file on a filesystem disk.
              El orden de store es el siguiente guardame dentro de public
              en la acrpeta store la imagen y almacena la ruta en el campo image del post.
             */
-            $post->image = $request->file('file')->store('posts','public');
+            $post->image = $request->file('file')->store('posts', 'public');
 
             // Salvamos la información
             $post->save();
@@ -83,7 +84,7 @@ class PostController extends Controller
         // retornar resultado
         // EL método back crea una solicitud de redirección 
         // hacia la ultima ubicación antes de disparar este método
-        return back()->with('status','Creado con éxito');
+        return back()->with('status', 'Creado con éxito');
     }
 
     /**
@@ -104,9 +105,22 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        // 1.Recibe los datos validados correctamente por nuestra validación independiente
+        $post->update($request->all());
+
+        // 2.Eliminar imagen anterior
+        Storage::disk('public')->delete($post->image);
+
+        // 3.Al actualizar debo eliminar la imagen para colocar la nueva
+        if ($request->file('file')) {
+            $post->image = $request->file('file')->store('posts', 'public');
+            $post->save();
+        }
+
+        // retornar feedback al usuario
+        return back()->with('status', 'Actualizado con éxito');
     }
 
     /**
@@ -117,6 +131,16 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // Eliminación de una imagen
+        Storage::disk('public')->delete($post->image);
+
+        //Eliminar un post usando delete
+        $post->delete();
+
+        // Creamos una redirección a la vista anterior 
+        // enviando feedback al usuario
+        // usando una variable flash
+
+        return back()->with('status', 'Eliminado con éxito');
     }
 }
