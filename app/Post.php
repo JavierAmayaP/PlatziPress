@@ -10,6 +10,12 @@ class Post extends Model
 {
     use sluggable;
 
+    // Configurando la asignación masiva de datos
+    // Inidca a laravel que datos recibir 
+    protected $fillable = [
+        'title', 'body', 'iframe', 'image', 'user_id'
+    ];
+
     /**
      * Return the sluggable configuration array for this model.
      *

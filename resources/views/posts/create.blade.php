@@ -13,7 +13,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">Título*</label>
                             <input type="text" name="title" class="form-control" required>

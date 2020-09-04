@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -49,9 +50,40 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        // dd($request->all());
+        //salvar información
+        $post = Post::create([
+            // El user_id se rellena con el id del usuario logueado
+            'user_id' => auth()->user()->id
+        ] + $request->all());
+
+        // trabajar con imagenes
+        /* 
+            Si recibimos un archivo debemos salvarlos en nuestro proyecto
+            para despues almacenar la url de ese archivo en la base de datos.
+            Nunca guardamos un archivo como tal en la base de datos.
+
+         */
+
+        if($request->file('file')){
+            /*
+             Enviamos la imagen al servidor con el método store
+             store() -> Store the uploaded file on a filesystem disk.
+             El orden de store es el siguiente guardame dentro de public
+             en la acrpeta store la imagen y almacena la ruta en el campo image del post.
+            */
+            $post->image = $request->file('file')->store('posts','public');
+
+            // Salvamos la información
+            $post->save();
+        }
+
+        // retornar resultado
+        // EL método back crea una solicitud de redirección 
+        // hacia la ultima ubicación antes de disparar este método
+        return back()->with('status','Creado con éxito');
     }
 
     /**
