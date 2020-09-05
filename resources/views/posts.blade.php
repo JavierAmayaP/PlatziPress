@@ -6,7 +6,14 @@
         <div class="col-md-8">
             <!-- impirmir todos los post usanso una tarjeta como base-->
             @foreach($posts as $post)
-            <div class="card">
+            <div class="card mb-4">
+                @if($post->image)
+                <img src="{{ $post->get_image }}" class="card-img-top">
+                @elseif($post->iframe)
+                <div class="embed-responsive embed-responsive-16by9">
+                    {!! $post->iframe !!}
+                </div>
+                @endif
                 <div class="card-body">
                     <h5 class="card-title">{{$post->title}}</h5>
                     <p class="car-text">

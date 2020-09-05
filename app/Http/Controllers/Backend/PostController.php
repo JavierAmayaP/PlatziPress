@@ -107,14 +107,16 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        // dd($request->all());
         // 1.Recibe los datos validados correctamente por nuestra validación independiente
         $post->update($request->all());
 
-        // 2.Eliminar imagen anterior
-        Storage::disk('public')->delete($post->image);
+        
 
         // 3.Al actualizar debo eliminar la imagen para colocar la nueva
         if ($request->file('file')) {
+            // 2.Eliminar imagen anterior
+        Storage::disk('public')->delete($post->image);
             $post->image = $request->file('file')->store('posts', 'public');
             $post->save();
         }
