@@ -21,8 +21,8 @@ Nota: <th> y <tr> y <td>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Artículos
-                    <a href="{{ route('posts.create') }}" class="btn btn-sm btn-primary float-right">Crear</a>
+                    <i class="far fa-newspaper"></i> Artículos
+                    <a href="{{ route('posts.create') }}" class="btn btn-sm btn-primary float-right"><i class="fas fa-plus-circle"></i></a>
                 </div>
 
                 <div class="card-body">
@@ -45,18 +45,16 @@ Nota: <th> y <tr> y <td>
                                 <td>{{$post->id}}</td>
                                 <td>{{$post->title}}</td>
                                 <td>
-                                    <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary button-small">Editar</a>
+                                    <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary button-small"><i class="far fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{ route('posts.destroy', $post) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input 
-                                            type="submit" 
-                                            value="Eliminar" 
-                                            class="btn btn-danger btn-small" 
-                                            onclick="return confirm('¿Desea Eliminar...?')"
-                                        >
+                                        <!-- <input type="submit" value="Eliminar" class="btn btn-danger btn-small" )"> -->
+                                        <button  type="submit" value="Eliminar" class="btn btn-danger button-small" onclick="return confirm('¿Desea Eliminar...?')">
+                                        <i class="far fa-trash-alt"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
