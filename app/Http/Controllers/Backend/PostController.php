@@ -18,9 +18,9 @@ class PostController extends Controller
     public function index()
     {
         //Imprimir todos los post y retornarlos a la vista
-
-        $posts = Post::latest()->get();
-
+        
+        $posts = Post::latest()->paginate();
+        // dd($posts);
         /* Usando arreglos para retornar a la vista
         return view('posts.index',[
             'posts' => $posts
@@ -144,5 +144,9 @@ class PostController extends Controller
         // usando una variable flash
 
         return back()->with('status', 'Eliminado con éxito');
+    }
+
+    public function backToIndex(){
+        return back();
     }
 }

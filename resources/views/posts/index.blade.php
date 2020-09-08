@@ -31,7 +31,7 @@ Nota: <th> y <tr> y <td>
                         {{ session('status') }}
                     </div>
                     @endif
-                    <table class="table table-hover table-responsive">
+                    <table class="table table-hover table-responsive-md">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -60,7 +60,11 @@ Nota: <th> y <tr> y <td>
                             </tr>
                             @endforeach
                         </tbody>
+                       
                     </table>
+                    <div class="d-flex justify-content-center">
+                    {{ $posts->links() }}
+                    </div>
                 </div>
             </div>
         </div>

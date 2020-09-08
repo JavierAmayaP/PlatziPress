@@ -4518,6 +4518,20 @@ input[type=button].btn-block {
   justify-content: space-between;
 }
 
+.navbar{
+  background-color: #1A2F3C;
+  
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: white;
+}
+
+.navbar .dropdown-toggle{
+  color: #98CA3F;
+}
+
 .navbar-brand {
   display: inline-block;
   padding-top: 0.32rem;

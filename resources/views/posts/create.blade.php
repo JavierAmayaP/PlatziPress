@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><i class="fas fa-plus-circle"></i> Crear Artículo</div>
+            <div class="card-header">
+                    <a href="{{route('posts.index')}}" class="btn btn-outline-primary btn-sm"><i class="far fa-hand-point-left"></i></a> Crear Artículo
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))

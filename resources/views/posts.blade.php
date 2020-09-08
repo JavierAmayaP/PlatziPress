@@ -22,10 +22,13 @@
                     </p>
                     <p class="text-muted mb-0">
                         <em>
-                            &ndash; {{$post->user->name}}
+                        <i class="fas fa-user-alt"></i>  {{$post->user->name}}
                         </em>
-
-                        {{$post->created_at->format('d m Y')}}
+                        <br>
+                        <em>
+                        <i class="far fa-calendar-alt"></i> {{$post->created_at->format('d / m / Y')}}
+                        </em>
+                        
                     </p>
                 </div>
             </div>
