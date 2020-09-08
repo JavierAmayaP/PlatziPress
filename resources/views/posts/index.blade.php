@@ -31,7 +31,7 @@ Nota: <th> y <tr> y <td>
                         {{ session('status') }}
                     </div>
                     @endif
-                    <table class="table table-hover">
+                    <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -45,14 +45,14 @@ Nota: <th> y <tr> y <td>
                                 <td>{{$post->id}}</td>
                                 <td>{{$post->title}}</td>
                                 <td>
-                                    <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary button-small"><i class="far fa-edit"></i></a>
+                                    <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{ route('posts.destroy', $post) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <!-- <input type="submit" value="Eliminar" class="btn btn-danger btn-small" )"> -->
-                                        <button  type="submit" value="Eliminar" class="btn btn-danger button-small" onclick="return confirm('¿Desea Eliminar...?')">
+                                        <button  type="submit" value="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('¿Desea Eliminar...?')">
                                         <i class="far fa-trash-alt"></i>
                                         </button>
                                     </form>
