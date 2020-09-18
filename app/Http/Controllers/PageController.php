@@ -18,7 +18,7 @@ class PageController extends Controller
             2.-La data que nosotros procesamos.
         */
         return view('posts',[
-            'posts' => Post::with('user')->latest()->paginate()
+            'posts' => Post::with('user')->latest()->paginate(10)
         ]);
     }
 

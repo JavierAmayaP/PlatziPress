@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -19,7 +20,7 @@ class PostController extends Controller
     {
         //Imprimir todos los post y retornarlos a la vista
         
-        $posts = Post::latest()->paginate();
+        $posts = Post::orderBy('id', 'desc')->where('user_id', auth()->user()->id)->paginate(10);
         // dd($posts);
         /* Usando arreglos para retornar a la vista
         return view('posts.index',[
